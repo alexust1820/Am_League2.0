@@ -1,24 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from "react";
+import { HeaderContext } from "./context";
+import MainScreen from "./Main";
+import {Routes, Route} from 'react-router-dom';
+import Registration from "./Registration";
+import Login from "./Login";
+import Profile from "./Profile";
+import axios from "axios";
+import CreateTeam from "./CreateTeam";
+import InviteToTeam from "./InviteToTeam";
 
 function App() {
+  
+  const token = localStorage.getItem("jwt");
+  const [userParams, setUserParams] = useState('');
+
+  const getUserParams = async () => {
+    axios({
+      method: "post",
+      url: "http://localhost:8080/userInfo",
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then( async (res) => {
+      const data = await res.data
+      setUserParams(data)
+    })
+  }
+
+  useEffect(() => {
+    if(userParams == '') {
+      getUserParams();
+    }
+  })
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <HeaderContext.Provider value={userParams}>
+        <Routes>
+          <Route path="/" element={<MainScreen/>}/>
+          <Route path="/registration" element={<Registration/>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/profile" element={<Profile/>}/>
+          <Route path="/profile/create-team" element={<CreateTeam/>}/>
+          <Route path="/invite-to-team" element={<InviteToTeam/>}/>
+        </Routes>
+      </HeaderContext.Provider>
+    </>
   );
 }
 
