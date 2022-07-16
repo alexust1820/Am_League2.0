@@ -1,0 +1,19 @@
+.profile {
+    min-height: calc(100vh - 275px);
+    padding: 40px 0 0 0;
+}
+
+.name, .lastname {
+    margin-bottom: 5px;
+}
+
+.email {
+    margin-bottom: 200px;
+}
+
+.createTeam {
+    padding: 7px 10px;
+    background-color: var(--c-green);
+    color: var(--c-white);
+    border-radius: 3px;
+}
