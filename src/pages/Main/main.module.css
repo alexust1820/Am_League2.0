@@ -1,0 +1,42 @@
+.hero {
+    min-height: calc(100vh - 74px);
+    min-width: 100%;
+    background-image: url("../../media/hero-bg.jpg");
+    background-position: center;
+    background-size: 100%;
+}
+
+.content {
+    padding: 200px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    text-align: center;
+}
+
+.createTeamAndMatch {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 1201px) {
+    .hero {
+        background-size: 150%;
+    }
+}
+
+@media (max-width: 800px) {
+    .hero {
+        background-size: 200%;
+    }
+}
+
+@media (max-width: 500px) {
+    .hero {
+        background-size: 300%;
+    }
+}
