@@ -11,7 +11,7 @@ export const Header = () => {
     const nav = useNavigate()
     const userParams = useContext(UserContext)
 
-    if (!userParams) {
+    if (!userParams.id) {
         return(
             <>
                 <PageHeader
@@ -51,7 +51,7 @@ export const Header = () => {
                             nav('/profile')
                         }}>
                             <Typography.Text>
-                                {userParams}
+                                {userParams.name}
                             </Typography.Text>
                             <UserOutlined />
                         </Button>

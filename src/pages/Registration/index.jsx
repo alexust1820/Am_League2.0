@@ -1,19 +1,25 @@
-import React from "react"
+import React, { useContext } from "react"
 import axios from "axios"
-import { Button, Form, Input } from 'antd'
+import { Button, Form, Input, Select } from 'antd'
 import {Link} from "react-router-dom"
 import RegCSS from "./reg.module.css"
 import { Header } from "../../components/Header"
+import {registrationURL} from "../../config.js"
+import { PositionContext } from "../../hoc/PosiotionProvider"
+
+const { Option } = Select
 
 export const Registration = () => {
     document.title = 'Регистрация'
 
+    const positions = useContext(PositionContext)
+
     const OnFinish = (e) => {
-        const url = "http://localhost:8080/registration"
-        axios.post(url, {
+        axios.post(registrationURL, {
             name: e.name,
             surname: e.surname,
             email: e.email,
+            position_id: e.position_id,
             password: e.password
         }).then(response => {
             const code = response.data.code
@@ -85,6 +91,28 @@ export const Registration = () => {
                         >
                             <Input />
                         </Form.Item>
+
+                        <Form.Item
+                            label="Позиция"
+                            name="position_id"
+                            rules={[
+                            {
+                                required: true,
+                                message: 'Пожалуйста, введите свою позицию!',
+                            },
+                            ]} 
+                            >
+                            <Select defaultValue={1}>
+                                {positions.map((position, i) => {
+                                    return(
+                                            <Option key={i} value={(i+1)}>
+                                                {position}
+                                            </Option>
+                                        )
+                                })}
+                            </Select>
+                        </Form.Item>
+
                         <Form.Item
                             label="Пароль"
                             name="password"
@@ -97,6 +125,7 @@ export const Registration = () => {
                         >
                             <Input.Password />
                         </Form.Item>
+                        
                         <Form.Item
                             wrapperCol={{
                             offset: 8,

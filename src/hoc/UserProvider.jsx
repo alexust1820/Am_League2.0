@@ -1,27 +1,46 @@
 import axios from "axios";
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 
 export const UserContext = React.createContext(null)
+const jwt = localStorage.getItem('jwt')
 
 export const UserProvider = ({children}) => {
-    const [userParams, setUserParams] = useState(null)
-    const jwt = localStorage.getItem('jwt')
+    const [userParams, SetUserParams] = useState({
+        id: null,
+        name: "",
+        surname: "",
+        email: "",
+        position_id: null
+    })
 
-    if(jwt) {
+    const url = "http://localhost:8080/user-params"
+
+    const GetUserParams = async () => {
         axios({
             method: "post",
-            url: "http://localhost:8080/user-params",
+            url: url,
             headers: {
-            Authorization: `Bearer ${jwt}`
+                Authorization: `Bearer ${jwt}`
             }
-        }).then( async (res) => {
-            setUserParams(res.data)
+        }).then(async (res) => {
+            SetUserParams(res.data)
         })
     }
 
+    if(!userParams.id & Boolean(jwt)) {
+        GetUserParams()
+    }
+
     return(
-        <UserContext.Provider value={userParams}>
+        <UserContext.Provider value={
+                {
+                    id: userParams.id,
+                    name: userParams.name,
+                    surname: userParams.surname,
+                    email: userParams.email,
+                    position_id: userParams.position_id
+                }
+            }>
             {children}
         </UserContext.Provider>
     )

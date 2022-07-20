@@ -33,7 +33,7 @@ export default function Main() {
                                 className={MainCSS.createMatch}>
                                     Создать матч
                             </Button>    
-                        </div>			
+                        </div>	
                     </div>
                 </div>
             </div>
