@@ -2,14 +2,17 @@ import Head from "next/head"
 import { Header } from "./Header"
 
 const MainContainer = ({children, metadata}) => {
-    console.log(metadata)
     return(
         <>
             <Head>
                 <title>{metadata.title}</title>
+                <meta property="og:title" content={metadata.title} />
+                <meta property="og:description" content={metadata.desc} />
             </Head>
             <Header/>
-            {children}
+            <div className="container">
+                {children}
+            </div>
         </>
     )
 }

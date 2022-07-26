@@ -1,0 +1,12 @@
+.content {
+    display: grid;
+    grid-template-columns: auto;
+}
+
+.title, .isReg {
+    text-align: center;
+}
+
+.form {
+    margin: 40px 0 100px 0;
+}

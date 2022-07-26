@@ -1,0 +1,11 @@
+.main {
+    background-image: url("../public/hero-bg.jpg")
+}
+
+.content {
+    padding-top: 200px;
+}
+
+.title {
+    text-align: center;
+}
