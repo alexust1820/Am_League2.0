@@ -4,9 +4,10 @@ import axios from "axios"
 import Link from 'next/link'
 import MainContainer from "../../components/MainContainer"
 import LoginCSS from './login.module.css'
-import Router from 'next/dist/server/router'
+import { useRouter } from 'next/router'
 
 const Login = () => {
+    const router = useRouter()
 
     const metadata = {
         title: "Авторизация",
@@ -25,7 +26,7 @@ const Login = () => {
             } else if (code === 202) {
                 alert(`Вы авторизированы`)
                 jsCookie.set('token', response.data.jwt)
-                
+                router.push('/')
             } else {
                 alert(`Что-то пошло не так. Попробуйте позже`)
             }
