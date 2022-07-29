@@ -1,18 +1,23 @@
-import React, { useContext } from "react"
+import React from "react"
 import axios from "axios"
 import { Button, Form, Input, Select } from 'antd'
 import {Link} from "react-router-dom"
 import RegCSS from "./reg.module.css"
 import { Header } from "../../components/Header"
-import {registrationURL} from "../../config.js"
-import { PositionContext } from "../../hoc/PosiotionProvider"
+import {registrationURL} from "../../clientConfig.js"
 
 const { Option } = Select
 
 export const Registration = () => {
     document.title = 'Регистрация'
 
-    const positions = useContext(PositionContext)
+    const positions = [
+        'Не определен',
+        'Вратать',
+        'Защитник',
+        'Полузащитник',
+        'Нападающий'
+    ]
 
     const OnFinish = (e) => {
         axios.post(registrationURL, {

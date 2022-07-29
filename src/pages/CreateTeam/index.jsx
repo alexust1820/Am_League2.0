@@ -3,7 +3,7 @@ import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { Header } from "../../components/Header"
 import CreateCSS from "./create.module.css"
 import axios from 'axios'
-import {createTeamURL} from "../../config.js"
+import {createTeamURL} from "../../clientConfig.js"
 import { useContext } from 'react'
 import { UserContext } from '../../hoc/UserProvider'
 
@@ -13,6 +13,14 @@ const SendNewTeam = (teamParams) => {
         headers: {
             Authorization: `Bearer ${jwt}`
         }
+    }).then((res) => {
+        const createTeamCode = res.data.code
+        if(createTeamCode === 409) {
+            alert(`Вы не можете регистрировать более одной команды`)
+        } else if(createTeamCode === 201) {
+            alert(`Вы создали команду. Поздравляем!`)
+            window.location.href = '/'
+        } else alert(`Что-то пошло не так. Попробуйте позже`)
     })
 }
 

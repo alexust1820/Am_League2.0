@@ -2,11 +2,9 @@ import React from "react"
 import {useNavigate} from 'react-router-dom';
 import { Header } from "../../components/Header"
 import { Typography, Button } from "antd"
-//import { green } from '@ant-design/colors'
 import MainCSS from "./main.module.css"
 
 export default function Main() {
-    document.title = 'Am League'
     const nav = useNavigate()
     return(
         <>

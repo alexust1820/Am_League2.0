@@ -1,5 +1,11 @@
 .content {
     padding-top: 40px;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.title {
+    text-align: center;
 }
 
 .userBlock {

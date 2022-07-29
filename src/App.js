@@ -12,13 +12,10 @@ import { RequireAuth } from "./hoc/RequireAuth"
 import { CreateTeam } from "./pages/CreateTeam"
 import { TeamList } from "./pages/TeamsList"
 import { InvitePage } from "./pages/InvitePage"
-import { PositionProvider } from "./hoc/PosiotionProvider"
-
 
 export default function App() {
   return (
-    <PositionProvider>
-      <UserProvider>
+    <UserProvider>
         <Routes>
           <Route path="/" element={<Main/>} />
           <Route path="/registration" element={<Registration/>} />
@@ -34,10 +31,9 @@ export default function App() {
             </RequireAuth>
           } />
           <Route path="/teams" element={<TeamList/>} />
-          <Route path="/invite-new-user/:email/:team_id" element={<InvitePage/>} />
+          <Route path="/invite-player/:email/:team_id/:team_name/:isNew" element={<InvitePage/>} />
           <Route path="*" element={<NotFound/>} />
         </Routes>
       </UserProvider>
-    </PositionProvider>
   )
 }

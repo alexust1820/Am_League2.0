@@ -27,7 +27,7 @@ export const UserProvider = ({children}) => {
         })
     }
 
-    if(!userParams.id & Boolean(jwt)) {
+    if(!userParams.id & Boolean(jwt) & jwt !== undefined) {
         GetUserParams()
     }
 

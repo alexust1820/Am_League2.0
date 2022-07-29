@@ -6,6 +6,9 @@ import LoginCSS from "./login.module.css"
 import { Header } from "../../components/Header"
 
 export const Login = () => {
+
+    document.title = 'Логин'
+
     function OnFinish(e) {
         const url = "http://localhost:8080/login"
         axios.post(url, {
